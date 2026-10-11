@@ -1,4 +1,4 @@
-# Anteproyecto: [Nombre del Proyecto]
+# Anteproyecto: Gestor de Rol
 
 **Módulo:** Proyecto Intermodular (0379 · PIDW2) — 2º DAW Virtual 
 
@@ -8,7 +8,7 @@
 
 **Repositorio GitHub:** [\[\Nchsal\daw-proyecto-gestorrol\]](https://github.com/Nchsal/daw-proyecto-gestorrol)
 
-**Tablero GitHub Projects:** [URL del tablero Kanban]
+**Tablero GitHub Projects:** [Acceso al Tablero en GitHub Projects](https://github.com/users/Nchsal/projects/1)
 
 
 ---
@@ -65,9 +65,9 @@ Se utiliza tanto de forma asíncrona (durante la fase de planificación, diseño
 
 ---
 ## 3. Modelo de datos
-- **Diagrama Entidad-Relación en 3FN:** 
-- **Relación 1:N:** 
-- **Relación M:N con atributos:** 
+- **Diagrama Entidad-Relación en 3FN:** [docs/der.md](docs/der.md)
+- **Relación 1:N:** `CAMPANA` (1) ───< (N) `SESION` (Una campaña almacena múltiples sesiones de juego ordenadas cronológicamente).
+- **Relación M:N con atributos:** `PERSONAJE` y `SESION` vinculadas mediante la tabla intermedia `ASISTENCIA_SESION` (la cual incluye el atributo propio booleano `presente` para registrar la asistencia individual de cada personaje por sesión).
 
 ---
 ## 4. Stack tecnológico previsto
