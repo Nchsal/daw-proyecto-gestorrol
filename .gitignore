@@ -1,0 +1,17 @@
+# Dependencias
+node_modules/
+vendor/
+
+# Archivos de entorno y secretos (¡muy importante!)
+.env
+
+# Carpetas de compilación o distribución
+dist/
+build/
+out/
+
+# Configuración de editores y sistemas operativos
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
