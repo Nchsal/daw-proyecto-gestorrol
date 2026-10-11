@@ -1,3 +1,6 @@
+# Diagrama Entidad-Relación (DER)
+
+```
 erDiagram
     CAMPANA ||--o{ PERSONAJE : "contiene"
     CAMPANA ||--o{ LOCALIZACION : "incluye"
@@ -81,4 +84,4 @@ erDiagram
     SESION_PNJ {
         int sesion_id PK, FK
         int pnj_id PK, FK
-    }
+    }```
