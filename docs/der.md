@@ -1,12 +1,12 @@
 # Diagrama Entidad-Relación (DER)
 
-```
+```mermaid
 erDiagram
     CAMPANA ||--o{ PERSONAJE : "contiene"
     CAMPANA ||--o{ LOCALIZACION : "incluye"
     CAMPANA ||--o{ SESION : "registra"
     CAMPANA ||--o{ PNJ : "pobla"
-    CAMPana ||--o{ OBJETO_TRAMA : "posee"
+    CAMPANA ||--o{ OBJETO_TRAMA : "posee"
     CAMPANA ||--o{ SECRETO_MASTER : "oculta"
     
     SESION ||--o{ ASISTENCIA_PJ : "participa"
