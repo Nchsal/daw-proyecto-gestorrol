@@ -85,4 +85,4 @@ erDiagram
         int sesion_id PK, FK
         int pnj_id PK, FK
     }
-    ```
+```
