@@ -6,7 +6,7 @@
 
 **Autor/a:** Ignacio Salván Meana
 
-**Repositorio GitHub:** [\[\Nchsal\daw-proyecto-gestorrol\]](https://github.com/Nchsal/daw-proyecto-gestorrol)
+**Repositorio GitHub:** [Gestor de Rol](https://github.com/Nchsal/daw-proyecto-gestorrol)
 
 **Tablero GitHub Projects:** [Acceso al Tablero en GitHub Projects](https://github.com/users/Nchsal/projects/1)
 
@@ -23,7 +23,7 @@ Su valor consiste en reducir drásticamente el tiempo de preparación de las par
 La plataforma está dirigida a dos perfiles principales:
 - **Directores de juego (Masters):** Usuarios avanzados que diseñan, configuran y administran ambientaciones, tramas, PNJs, mapas y eventos.
 - **Jugadores:** Participantes activos que lleven un control del trasfondo, gestionen la evolución del mundo alrededor de sus propios personajes y administren un registro de las sesiones jugadas.
-- **Comunidades y Grupos de Juego:** Mesas de rol habituales que busquen un espacion compartido de colaboración para sincronizar fichas, notas y diarios entre sesiones.
+- **Comunidades y Grupos de Juego:** Mesas de rol habituales que busquen un espacio compartido de colaboración para sincronizar fichas, notas y diarios entre sesiones.
 - **Editoriales y Creadores de Contenido:** Creadores y editoriales que busquen publicar, estructurar y promocionar sus campañas, módulos o aventuras dentro del catálogo público de la plataforma, conectando directamente con la comunidad de jugadores.
 
 Se utiliza tanto de forma asíncrona (durante la fase de planificación, diseño de campañas y actualización de diarios entre partidas) como de forma síncrona, en tiempo real durante las propias sesiones de juego, como panel de consulta rápida.
@@ -46,9 +46,9 @@ Se utiliza tanto de forma asíncrona (durante la fase de planificación, diseño
 ### 2.1. Matriz de roles (RBAC)
 - **Administrador:** Gestión global de la plataforma, control de usuarios registrados, moderación de contenidos y mantenimiento de los catálogos maestros del sistema.
 - **Usuario registrado:** Creación y participación en campañas de rol, gestión completa de personajes, aportación de notas de sesión, consulta interctiva de mapas y cronología y publicación comunitaria de contenido.
-- **Público / invitado:** Visualización de la página de presentación informativa de la plataforma, consulta del catálogo público de camapñas abiertas o de muestra distribuidas por creadores y editoriales, y formulario de registtro o inicio de sesión.
+- **Público / invitado:** Visualización de la página de presentación informativa de la plataforma, consulta del catálogo público de campañas abiertas o de muestra distribuidas por creadores y editoriales, y formulario de registtro o inicio de sesión.
 
-### 2.2. Casos de uso principales (mínimo 6)
+### 2.2. Casos de uso principales
 
 1. **CU-01:** Registro e inicio de sesión seguro con tokens JWT y control de acceso basado en roles (RBAC).
 2. **CU-02:** Administración técnica global de la plataforma, control de cuentas de usuarios y moderación del catálogo público de contenidos (Rol: Administrador).
@@ -56,12 +56,12 @@ Se utiliza tanto de forma asíncrona (durante la fase de planificación, diseño
 4. **CU-04:** Creación, gestión y dirección de campañas colaborativas (mesas de juego), gestionando solicitudes y permisos de los jugadores asociados (Rol: Usuario registrado / Director de Juego).
 5. **CU-05:** Creación, edición y evolución de fichas de personaje vinculados tanto a los Cuadernos de Campaña personales como a campañas grupales (Rol: Usuario Registrado / Jugador).
 6. **CU-06:** Registro de eventos en líneas temporales, diarios de sesiones y vinculación de localizaciones en mapas interactivos (Rol: Usuario registrado)
-7. **CU-07:** Gestión de Cuadernos de Campaña comunitarios o de grupo y control granular de visibilidad y privacidad de la información, permitiendo al Director de Juego compartir información de la sesión y manternerla oculta hasta el momento deseado frente a la vista pública de los jugadores (Rol: Usuario Registrado / Director de Juego).
-8. **CU-08:** Sistema de referencias cruzadas e hipervinculaciñon dinámica, permitiendo enlazar PNJs, localizaciones u objetos directamente desde los textos de los diarios de sesión para consulta rápida (Rol: Usuario Registrado)
+7. **CU-07:** Gestión de Cuadernos de Campaña comunitarios o de grupo y control granular de visibilidad y privacidad de la información, permitiendo al Director de Juego compartir información de la sesión y mantenerla oculta hasta el momento deseado frente a la vista pública de los jugadores (Rol: Usuario Registrado / Director de Juego).
+8. **CU-08:** Sistema de referencias cruzadas e hipervinculación dinámica, permitiendo enlazar PNJs, localizaciones u objetos directamente desde los textos de los diarios de sesión para consulta rápida (Rol: Usuario Registrado)
 
 ### 2.3. Alcance del MVP (Hito 3, diciembre)
 - **Incluido:** sistema de autenticación con JWT y roles RBAC, CRUD completo de campañas y personajes, diario de sesiones, cronolodía histórica de eventos, sistema de visibilidad (secretos Director / vista Jugador) y catálogo público para la consulta e importación gratutita de módulos comunitarios.
-- **Fuera del MVP:** Red social de usuarios (lista de amigos, solicitudes y grupos de juego independientes de campañas), importador/exportador automatizado de campañas mediante archivos de datos (`JSON`o paquetes comprimidos) y pasarela de pago para la venta de módulos oficiales (reservados par ala fase de Add-ons y líneas futuras).
+- **Fuera del MVP:** Red social de usuarios (lista de amigos, solicitudes y grupos de juego independientes de campañas), importador/exportador automatizado de campañas mediante archivos de datos (`JSON`o paquetes comprimidos) y pasarela de pago para la venta de módulos oficiales (reservados para la fase de Add-ons y líneas futuras).
 
 ---
 ## 3. Modelo de datos
@@ -74,7 +74,7 @@ Se utiliza tanto de forma asíncrona (durante la fase de planificación, diseño
 - **Motor de base de datos:** [MariaDB / MySQL] - Jutificación: Sólido soporte relacional, gran rendimiento en entornos de desarrollo Linux/Windows y total adecuación con las directices institucionales de normalización en 3FN.
 - **Backend API:** [Node.js con Express] - Justificación: Desarrollo ágil de API REST asíncrona, amplio ecosistema de librerías para autenticación JWT y estructura modular.
 - **Frontend:** [React / Vue.js] - Justificación: Arquitectura basada en componentes reactivos ideal para construir paneles de control dinámicos, fluidos e interactivos para el seguimiento de las campañas.
-- **Alojamiento cloud previsto:** [Render / Railway] - Justificación: Plataforma PaaS condespliegue continuo automatizado desde repositorios de GitHub muy sencilla de integrar en entregas académicas.
+- **Alojamiento cloud previsto:** [Render / Railway] - Justificación: Plataforma PaaS con despliegue continuo automatizado desde repositorios de GitHub muy sencilla de integrar en entregas académicas.
 
 ---
 ## 5. Selección tentativa de Add-ons (mínimo 2)
