@@ -6,7 +6,7 @@
 
 **Autor/a:** Ignacio Salván Meana
 
-**Repositorio GitHub:** [\[\Nchsal\daw-proyecto-gestorrol\]](https://github.com/Nchsal/daw-proyecto-gestorrol)
+**Repositorio GitHub:** [Gestor de Rol](https://github.com/Nchsal/daw-proyecto-gestorrol)
 
 **Tablero GitHub Projects:** [Acceso al Tablero en GitHub Projects](https://github.com/users/Nchsal/projects/1)
 
