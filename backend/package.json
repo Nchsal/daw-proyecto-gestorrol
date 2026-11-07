@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend para la gestión de campañas, personajes y sesiones del Gestor de Rol",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,5 +16,8 @@
   "dependencies": {
     "@prisma/client": "^5.19.0",
     "mysql2": "^3.24.6"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   }
 }
