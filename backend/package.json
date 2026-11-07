@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "prisma skills sync || exit 0",
+    "db:reset": "prisma migrate reset --force"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "devDependencies": {
+    "prisma": "^5.19.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.19.0",
+    "mysql2": "^3.24.6"
+  }
+}
