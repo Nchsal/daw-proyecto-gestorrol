@@ -15,3 +15,9 @@ out/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Herramientas de IA y copilotos locales
+.agents/
+.claude/
+.cursor/
+.devin/
