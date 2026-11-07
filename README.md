@@ -22,5 +22,5 @@ Plataforma web especializada en la gestión centralizada de campañas de rol, di
 - **Anteproyecto Funcional:** Consulta el documento completo en [Anteproyecto.md](Anteproyecto.md).
 - **Modelo de Datos (DER):** Diagrama técnico disponible en [docs/der.md](docs/der.md).
 
-## 📂 Documentación del Hito 2
+## 📂 Documentación git checkout developdel Hito 2
 - **Diccionario de Datos y 3FN:** Especificación relacional detallada y justificación de normalización en [docs/diccionario_datos.md](docs/diccionario_datos.md).
