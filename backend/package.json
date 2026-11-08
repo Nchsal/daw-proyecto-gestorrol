@@ -23,6 +23,6 @@
     "mysql2": "^3.24.6"
   },
   "prisma": {
-    "seed": "node prisma/seed.js"
+    "seed": "node prisma/seed.cjs"
   }
 }
