@@ -32,6 +32,7 @@ Almacena la información global de las campañas o mesas de rol dirigidas en el 
 | Campo | Tipo SQL | Nulo | Clave | Defecto | Restricciones / Reglas | Descripción funcional|
 |:---|:---|:---|:---|:---|:---|:---|
 | `id` | `INT UNSIGNED` | NO | PK | Auto_increment | - | Identificador único de la campaña |
+| `usuario_id` | `INT UNSIGNED` | NO | FK | - | `References USUARIO(id) ON DELETE CASCADE` |  Identificador del usuario propietario |
 | `nombre` | `VARCHAR(100)` | NO | - | - | `UNIQUE` | Nombre identificativo de la campaña |
 | `sistema_juego` | `VARCHAR(50)` | NO | - | - | - | Sistema de juego empleado en la campaña |
 | `descripcion` | `TEXT` | SI | - | NULL | - | Sinopsis o ambientación general |
