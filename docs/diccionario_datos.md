@@ -120,7 +120,19 @@ Información confidencial, tramas ocultas o revelaciones reservadas exclusivamen
 
 ---
 
-## 8. Tabla Intermedia M:N: `ASISTENCIA_SESION`
+## 8. Tabla: `USUARIO`
+Tabla de autenticación y control de acceso.
+
+| Campo | Tipo SQL | Nulo | Clave | Defecto | Restricciones / Reglas | Descripción Funcional |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `id` | `INT UNSIGNED` | NO | PK | Auto_increment | - | Identificador único del usuario |
+| `email` | `VARCHAR(100)` | NO | - | - | `UNIQUE` | Correo electrónico de acceso |
+| `password` | `VARCHAR(255)` | NO | - | - | - | Contraseña hasheada con bcrypt |
+| `rol` | `VARCHAR(20)` | NO | - | `'user'` | `CHECK (rol IN ('admin', 'user'))` | Rol de autorización (admin/user) |
+
+---
+
+## 9. Tabla Intermedia M:N: `ASISTENCIA_SESION`
 Resuelve la relación muchos a muchos entre personajes y sesiones, controlando la asistencia individual.
 
 | Campo | Tipo SQL | Nulo | Clave | Defecto | Restricciones / Reglas | Descripción Funcional |
@@ -131,7 +143,7 @@ Resuelve la relación muchos a muchos entre personajes y sesiones, controlando l
 
 ---
 
-## 9. Tabla Intermedia M:N: `SESION_PNJ`
+## 10. Tabla Intermedia M:N: `SESION_PNJ`
 Resuelve la relación muchos a muchos entre las sesiones jugadas y los PNJs que intervinieron en ellas.
 
 | Campo | Tipo SQL | Nulo | Clave | Defecto | Restricciones / Reglas | Descripción Funcional |
