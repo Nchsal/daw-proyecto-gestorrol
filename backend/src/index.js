@@ -2,6 +2,7 @@
 import express from 'express';
 import cors from 'cors';
 import errorHandler from './middlewares/errorHandler.js';
+import authRoutes from './routes/authRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -9,6 +10,7 @@ const PORT = process.env.PORT || 4000;
 // Middlewares globales
 app.use(cors());
 app.use(express.json());
+app.use('/api/v1/auth', authRoutes);
 
 // Ruta de comprobación de estado
 app.get('/api/v1/health', (req, res) => {
