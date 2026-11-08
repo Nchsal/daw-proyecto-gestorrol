@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import errorHandler from './middlewares/errorHandler.js';
 import authRoutes from './routes/authRoutes.js';
+import campanaRoutes from './routes/campanaRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/campanas', campanaRoutes);
 
 // Ruta de comprobación de estado
 app.get('/api/v1/health', (req, res) => {
