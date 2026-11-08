@@ -1,42 +1,50 @@
 // backend/src/controllers/campanaController.js
-import { obtenerCampanasService } from '../services/campanaService.js';
+import { 
+  obtenerCampanasService, 
+  crearCampanaService, 
+  obtenerCampanaPorIdService 
+} from '../services/campanaService.js';
 
 export const obtenerCampanas = async (req, res, next) => {
   try {
-    // El controlador delega la lógica en el servicio
     const campanas = await obtenerCampanasService();
-
-    // Devuelve el código HTTP canónico 200 OK con los datos
     return res.status(200).json({
       message: 'Campañas obtenidas con éxito',
       data: campanas
     });
   } catch (error) {
-    // Si hay un error, lo pasa al middleware global de errores (RFC 9457)
     next(error);
   }
 };
 
 export const crearCampana = async (req, res, next) => {
   try {
-    const { nombre, descripcion } = req.body;
+    const { nombre, descripcion, sistemaJuego, esPublico } = req.body;
     
-    // Simulación de validación para el error 422
     if (!nombre || nombre.trim() === '') {
       return res.status(422).json({
         type: "https://api.cifpaviles.es/errors/validation-failed",
         title: "Error de Validación",
         status: 422,
         detail: "El campo 'nombre' es obligatorio para crear una campaña.",
-        instance: "/api/v1/campanas",
+        instance: req.originalUrl,
         timestamp: new Date().toISOString()
       });
     }
 
-    // Simulación de creación exitosa (201 Created)
+    // Obtenemos el ID del usuario autenticado a través del token (req.user)
+    const usuarioId = req.user.id;
+
+    const nuevaCampana = await crearCampanaService({
+      nombre,
+      descripcion,
+      sistemaJuego: sistemaJuego || 'D&D 5.5',
+      esPublico: esPublico ?? false
+    }, usuarioId);
+
     return res.status(201).json({
       message: "Campaña creada con éxito",
-      data: { id: 99, nombre, descripcion }
+      data: nuevaCampana
     });
   } catch (error) {
     next(error);
@@ -47,21 +55,36 @@ export const obtenerCampanaPorId = async (req, res, next) => {
   try {
     const { id } = req.params;
     
-    // Simulamos que no se encuentra si el ID es 9999
-    const campanaEncontrada = id === '9999' ? null : { id: Number(id), nombre: "Campaña de Prueba" };
+    const campana = await obtenerCampanaPorIdService(id);
 
-    if (!campanaEncontrada) {
+    if (!campana) {
       return res.status(404).json({
         type: "https://api.cifpaviles.es/errors/not-found",
         title: "Recurso No Encontrado",
         status: 404,
         detail: `La campaña con ID ${id} no existe en el sistema.`,
-        instance: `/api/v1/campanas/${id}`,
+        instance: req.originalUrl,
         timestamp: new Date().toISOString()
       });
     }
 
-    return res.status(200).json({ data: campanaEncontrada });
+    // 🔒 CONTROL ANTI-BOLA (Resource Ownership)
+    // Si el usuario no es admin y la campaña no le pertenece, se bloquea el acceso (403)
+    const esAdmin = req.user.rol === 'admin';
+    const esPropietario = campana.usuarioId === req.user.id;
+
+    if (!esAdmin && !esPropietario) {
+      return res.status(403).json({
+        type: "https://api.cifpaviles.es/errors/forbidden",
+        title: "Acceso Prohibido (Anti-BOLA)",
+        status: 403,
+        detail: "No tienes permisos para acceder a esta campaña porque no te pertenece.",
+        instance: req.originalUrl,
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    return res.status(200).json({ data: campana });
   } catch (error) {
     next(error);
   }

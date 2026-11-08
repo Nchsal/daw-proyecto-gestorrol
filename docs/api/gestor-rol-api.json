@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "Gestor de Rol - API",
     "collectionId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
-    "dateExported": "2026-11-08T16:59:46.988Z",
+    "dateExported": "2026-11-08T19:13:50.532Z",
     "version": "1.4",
     "folders": [],
     "requests": [
@@ -10,7 +10,7 @@
             "_id": "6179f8fe-4fd0-4487-8127-f49bae44af1f",
             "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
             "containerId": "",
-            "name": "POST Login de Usuario",
+            "name": "POST Login de Usuario1",
             "url": "http://localhost:4000/api/v1/auth/login",
             "method": "POST",
             "sortNum": 40000,
@@ -139,7 +139,72 @@
                 "type": "bearer",
                 "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUBjaWZwYXZpbGVzLmVzIiwicm9sIjoidXNlciIsImlhdCI6MTc5NDE1MTI4MCwiZXhwIjoxNzk0MTgwMDgwfQ.pEYJw7JsbZqsgCDYb50oqoKfS6IsEBQ4zzldrp1_LOg"
             }
+        },
+        {
+            "_id": "33eb75f3-680d-457f-8a98-128d66b1bb28",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "POST Login de Usuario2",
+            "url": "http://localhost:4000/api/v1/auth/login",
+            "method": "POST",
+            "sortNum": 130000,
+            "created": "2026-11-08T19:01:03.042Z",
+            "modified": "2026-11-08T19:01:03.042Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{",
+                    "  \"email\": \"user2@cifpaviles.es\",",
+                    "  \"password\": \"User1234!\"",
+                    "}"
+                ],
+                "form": []
+            }
+        },
+        {
+            "_id": "12d7d1d1-33b8-4d71-9fe0-ea7d9e412923",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "POST Crear campaña vinculada (Éxito - 201 Created)",
+            "url": "http://localhost:4000/api/v1/campanas",
+            "method": "POST",
+            "sortNum": 140000,
+            "created": "2026-11-08T19:06:58.052Z",
+            "modified": "2026-11-08T19:06:58.052Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{\r",
+                    "  \"nombre\": \"Campaña de Prueba de User1\",\r",
+                    "  \"sistemaJuego\": \"D&D 5.5\",\r",
+                    "  \"descripcion\": \"Probando la propiedad de recursos.\"\r",
+                    "}"
+                ],
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUBjaWZwYXZpbGVzLmVzIiwicm9sIjoidXNlciIsImlhdCI6MTc5NDE1MTI4MCwiZXhwIjoxNzk0MTgwMDgwfQ.pEYJw7JsbZqsgCDYb50oqoKfS6IsEBQ4zzldrp1_LOg"
+            }
+        },
+        {
+            "_id": "00cf305d-8a7a-429b-a8c3-e6b407dd40f4",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "GET Buscar campaña vinculada - Test anti-BOLA  (Acceso Denegado - 403 Forbidden)",
+            "url": "http://localhost:4000/api/v1/campanas/11",
+            "method": "GET",
+            "sortNum": 150000,
+            "created": "2026-11-08T19:11:18.280Z",
+            "modified": "2026-11-08T19:11:18.280Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ1c2VyMkBjaWZwYXZpbGVzLmVzIiwicm9sIjoidXNlciIsImlhdCI6MTc5NDE2NDcwMCwiZXhwIjoxNzk0MTkzNTAwfQ.8HT0gapAf768V0xAQkrrKBfnwEvxQJ0vPym6T96OEXY"
+            }
         }
     ],
-    "ref": "_3GUv8NqUxiqjzeT8x3HV63gDaBkjBiAPXWVvqn4tUm4T1XCYlWMtvkvuXT4ZFDarPbKbdlnuOCNyigrORRa-A"
+    "ref": "_3GUv8NqUxiqjzeT8x3HVyVG6Eh5DfYLWEXlT9wq4O5o9V1D7ZDCJiL8WxVjaiJhQCeMSRv_KdZNa192pPOHGQ"
 }
