@@ -6,15 +6,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "prisma skills sync || exit 0",
+    "dev": "node --watch src/index.js",
     "db:reset": "prisma migrate reset --force"
   },
   "keywords": [],
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
     "prisma": "^5.19.0"
   },
   "dependencies": {
     "@prisma/client": "^5.19.0",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
     "mysql2": "^3.24.6"
   },
   "prisma": {
