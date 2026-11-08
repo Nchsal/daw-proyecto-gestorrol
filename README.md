@@ -10,14 +10,30 @@ Plataforma web especializada en la gestión centralizada de campañas de rol, di
 
 ---
 
-## 🚀 Stack Tecnológico Preliminar
-- **Base de Datos:** MariaDB / MySQL (Normalizada en 3FN)
+## 🚀 Stack Tecnológico 
+- **Base de Datos:** MySQL (Normalizada en 3FN)
 - **Backend:** Node.js con Express (API REST asíncrona con autenticación JWT)
-- **Frontend:** React / Vue.js (Interfaces modulares e interactivas)
-- **Despliegue / Cloud:** Render / Railway
+- **Frontend:** React (Interfaces modulares e interactivas)
+- **Despliegue / Cloud:** Render 
+
+---
+
+## 🛠️ Puesta en Marcha y Regeneración de la Base de Datos
+
+Para reconstruir la persistencia y la base de datos desde cero aplicando las migraciones de Prisma y los seeders robustos (incluyendo usuarios demo y datos masivos):
+
+```bash
+cd backend
+npm run db:reset
+```
 
 ---
 
 ## 📂 Documentación del Hito 1
 - **Anteproyecto Funcional:** Consulta el documento completo en [Anteproyecto.md](Anteproyecto.md).
+
+## 📂 Documentación del Hito 2
 - **Modelo de Datos (DER):** Diagrama técnico disponible en [docs/der.md](docs/der.md).
+- **Diccionario de Datos y 3FN:** Especificación relacional detallada y justificación de normalización en [docs/diccionario_datos.md](docs/diccionario_datos.md).
+
+---

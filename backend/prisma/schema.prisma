@@ -1,0 +1,146 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Campana {
+  id            Int             @id @default(autoincrement()) @map("id") @db.UnsignedInt
+  nombre        String          @unique @db.VarChar(100)
+  sistemaJuego  String          @map("sistema_juego") @db.VarChar(50)
+  descripcion   String?         @db.Text
+  fechaInicio   DateTime        @default(now()) @map("fecha_inicio")
+  esPublico     Boolean         @default(false) @map("es_publico")
+
+  // Relaciones 1:N
+  personajes    Personaje[]
+  sesiones      Sesion[]
+  pnjs          Pnj[]
+  localizaciones Localizacion[]
+  objetosTrama  ObjetoTrama[]
+  secretosMaster SecretoMaster[]
+
+  @@map("campana")
+}
+
+model Personaje {
+  id            Int             @id @default(autoincrement()) @db.UnsignedInt
+  campanaId     Int             @map("campana_id") @db.UnsignedInt
+  nombreJugador String          @map("nombre_jugador") @db.VarChar(80)
+  nombrePj      String          @map("nombre_pj") @db.VarChar(80)
+  clase         String          @db.VarChar(50)
+  nivel         Int             @default(1) @db.SmallInt
+
+  // Relación 1:N inversa
+  campana       Campana         @relation(fields: [campanaId], references: [id], onDelete: Cascade)
+
+  // Relación M:N
+  asistencias   AsistenciaSesion[]
+
+  @@map("personaje")
+}
+
+model Sesion {
+  id                 Int             @id @default(autoincrement()) @db.UnsignedInt
+  campanaId          Int             @map("campana_id") @db.UnsignedInt
+  numeroSesion       Int             @map("numero_sesion") @db.UnsignedInt
+  fecha              DateTime        @db.Date
+  resumen            String?         @db.Text
+  eventosPrincipales String?         @map("eventos_principales") @db.Text
+
+  // Relación 1:N inversa
+  campana            Campana         @relation(fields: [campanaId], references: [id], onDelete: Cascade)
+
+  // Relaciones M:N
+  asistencias        AsistenciaSesion[]
+  sesionPnjs         SesionPnj[]
+
+  @@map("sesion")
+}
+
+model Pnj {
+  id            Int             @id @default(autoincrement()) @db.UnsignedInt
+  campanaId     Int             @map("campana_id") @db.UnsignedInt
+  localizacionId Int?           @map("localizacion_id") @db.UnsignedInt
+  nombre        String          @db.VarChar(100)
+  relacionPjs   String?         @map("relacion_pjs") @db.Text
+  descripcion   String?         @db.Text
+
+  // Relaciones
+  campana       Campana         @relation(fields: [campanaId], references: [id], onDelete: Cascade)
+  localizacion  Localizacion?   @relation(fields: [localizacionId], references: [id], onDelete: SetNull)
+  sesionPnjs    SesionPnj[]
+
+  @@map("pnj")
+}
+
+model Localizacion {
+  id          Int       @id @default(autoincrement()) @db.UnsignedInt
+  campanaId   Int       @map("campana_id") @db.UnsignedInt
+  nombre      String    @db.VarChar(100)
+  descripcion String?   @db.Text
+
+  campana     Campana   @relation(fields: [campanaId], references: [id], onDelete: Cascade)
+  pnjs        Pnj[]
+
+  @@map("localizacion")
+}
+
+model ObjetoTrama {
+  id                Int     @id @default(autoincrement()) @db.UnsignedInt
+  campanaId         Int     @map("campana_id") @db.UnsignedInt
+  nombre            String  @db.VarChar(100)
+  descripcion       String? @db.Text
+  propietarioActual String? @map("propietario_actual") @db.VarChar(100)
+
+  campana           Campana @relation(fields: [campanaId], references: [id], onDelete: Cascade)
+
+  @@map("objeto_trama")
+}
+
+model SecretoMaster {
+  id              Int     @id @default(autoincrement()) @db.UnsignedInt
+  campanaId       Int     @map("campana_id") @db.UnsignedInt
+  titulo          String  @db.VarChar(150)
+  contenidoOculto String  @map("contenido_oculto") @db.Text
+  revelado        Boolean @default(false)
+
+  campana         Campana @relation(fields: [campanaId], references: [id], onDelete: Cascade)
+
+  @@map("secreto_master")
+}
+
+model AsistenciaSesion {
+  personajeId Int       @map("personaje_id") @db.UnsignedInt
+  sesionId    Int       @map("sesion_id") @db.UnsignedInt
+  presente    Boolean   @default(true)
+
+  personaje   Personaje @relation(fields: [personajeId], references: [id], onDelete: Cascade)
+  sesion      Sesion    @relation(fields: [sesionId], references: [id], onDelete: Cascade)
+
+  @@id([personajeId, sesionId])
+  @@map("asistencia_sesion")
+}
+
+model SesionPnj {
+  sesionId Int    @map("sesion_id") @db.UnsignedInt
+  pnjId    Int    @map("pnj_id") @db.UnsignedInt
+
+  sesion   Sesion @relation(fields: [sesionId], references: [id], onDelete: Cascade)
+  pnj      Pnj    @relation(fields: [pnjId], references: [id], onDelete: Cascade)
+
+  @@id([sesionId, pnjId])
+  @@map("sesion_pnj")
+}
+
+model Usuario {
+  id       Int      @id @default(autoincrement()) @db.UnsignedInt
+  email    String   @unique @db.VarChar(100)
+  password String   @db.VarChar(255) // Para almacenar el hash de bcrypt
+  rol      String   @default("user") @db.VarChar(20) // "admin" o "user"
+
+  @@map("usuario")
+}
