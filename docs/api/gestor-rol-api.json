@@ -1,0 +1,145 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Gestor de Rol - API",
+    "collectionId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+    "dateExported": "2026-11-08T16:59:46.988Z",
+    "version": "1.4",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "6179f8fe-4fd0-4487-8127-f49bae44af1f",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "POST Login de Usuario",
+            "url": "http://localhost:4000/api/v1/auth/login",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2026-11-08T15:20:25.827Z",
+            "modified": "2026-11-08T15:20:25.827Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{\r",
+                    "  \"email\": \"user1@cifpaviles.es\",\r",
+                    "  \"password\": \"User1234!\"\r",
+                    "}"
+                ],
+                "form": []
+            }
+        },
+        {
+            "_id": "8019e402-791e-42a5-bd14-adac6557f17b",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "GET Listar Campañas (Éxito - 200 OK)",
+            "url": "http://localhost:4000/api/v1/campanas",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2026-11-08T16:04:13.491Z",
+            "modified": "2026-11-08T16:04:13.491Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUBjaWZwYXZpbGVzLmVzIiwicm9sIjoidXNlciIsImlhdCI6MTc5NDE1MTI4MCwiZXhwIjoxNzk0MTgwMDgwfQ.pEYJw7JsbZqsgCDYb50oqoKfS6IsEBQ4zzldrp1_LOg"
+            }
+        },
+        {
+            "_id": "93000b76-9f8d-44d6-ba49-2f93919765c8",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "GET Listar Campañas (Sin Token - 401 Unauthorized)",
+            "url": "http://localhost:4000/api/v1/campanas",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2026-11-08T16:08:20.570Z",
+            "modified": "2026-11-08T16:08:20.570Z",
+            "headers": []
+        },
+        {
+            "_id": "cde2e6fc-cd80-4a4d-afc7-c9e408268cc1",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "POST Crear Campaña (Éxito - 201 Created)",
+            "url": "http://localhost:4000/api/v1/campanas",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2026-11-08T16:42:53.779Z",
+            "modified": "2026-11-08T16:42:53.780Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{",
+                    "  \"nombre\": \"La Sombra de los Susurros\",",
+                    "  \"descripcion\": \"Campaña de misterio e investigación en una ciudad portuaria.\"",
+                    "}"
+                ],
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUBjaWZwYXZpbGVzLmVzIiwicm9sIjoidXNlciIsImlhdCI6MTc5NDE1MTI4MCwiZXhwIjoxNzk0MTgwMDgwfQ.pEYJw7JsbZqsgCDYb50oqoKfS6IsEBQ4zzldrp1_LOg"
+            }
+        },
+        {
+            "_id": "e7f1d454-aef2-44a1-8e44-57e1a9a277f8",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "POST Crear Campaña (Error Validación - 422 Unprocessable Entity)",
+            "url": "http://localhost:4000/api/v1/campanas",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2026-11-08T16:46:24.912Z",
+            "modified": "2026-11-08T16:46:24.912Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{",
+                    "  \"nombre\": \"\",",
+                    "  \"descripcion\": \"Falta el nombre a propósito.\"",
+                    "}"
+                ],
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUBjaWZwYXZpbGVzLmVzIiwicm9sIjoidXNlciIsImlhdCI6MTc5NDE1MTI4MCwiZXhwIjoxNzk0MTgwMDgwfQ.pEYJw7JsbZqsgCDYb50oqoKfS6IsEBQ4zzldrp1_LOg"
+            }
+        },
+        {
+            "_id": "47c9cc8d-f12d-4dd0-8c92-e7a103716c3d",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "GET Buscar Campaña por ID (No Encontrada - 404 Not Found)",
+            "url": "http://localhost:4000/api/v1/campanas/9999",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2026-11-08T16:48:50.948Z",
+            "modified": "2026-11-08T16:48:50.948Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUBjaWZwYXZpbGVzLmVzIiwicm9sIjoidXNlciIsImlhdCI6MTc5NDE1MTI4MCwiZXhwIjoxNzk0MTgwMDgwfQ.pEYJw7JsbZqsgCDYb50oqoKfS6IsEBQ4zzldrp1_LOg"
+            }
+        },
+        {
+            "_id": "59c53713-bbf7-4e77-9af9-d4a0f753bed3",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "GET Panel Admin (Acceso Denegado - 403 Forbidden)",
+            "url": "http://localhost:4000/api/v1/campanas/admin/panel",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2026-11-08T16:50:18.904Z",
+            "modified": "2026-11-08T16:50:18.904Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUBjaWZwYXZpbGVzLmVzIiwicm9sIjoidXNlciIsImlhdCI6MTc5NDE1MTI4MCwiZXhwIjoxNzk0MTgwMDgwfQ.pEYJw7JsbZqsgCDYb50oqoKfS6IsEBQ4zzldrp1_LOg"
+            }
+        }
+    ],
+    "ref": "_3GUv8NqUxiqjzeT8x3HV63gDaBkjBiAPXWVvqn4tUm4T1XCYlWMtvkvuXT4ZFDarPbKbdlnuOCNyigrORRa-A"
+}
