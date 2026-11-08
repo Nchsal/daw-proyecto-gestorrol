@@ -25,24 +25,26 @@ async function main() {
   const adminPassword = await bcrypt.hash('Admin1234!', saltRounds);
   const userPassword = await bcrypt.hash('User1234!', saltRounds);
 
-  // 3. Crear los usuarios obligatorios
-  await prisma.usuario.createMany({
-    data: [
-      { email: 'admin@cifpaviles.es', password: adminPassword, rol: 'admin' },
-      { email: 'user1@cifpaviles.es', password: userPassword, rol: 'user' },
-      { email: 'user2@cifpaviles.es', password: userPassword, rol: 'user' },
-    ],
-  });
+  // 3. Crear los usuarios obligatorios y guardarlos en una variable
+  const usuarios = await Promise.all([
+    prisma.usuario.create({ data: { email: 'admin@cifpaviles.es', password: adminPassword, rol: 'admin' } }),
+    prisma.usuario.create({ data: { email: 'user1@cifpaviles.es', password: userPassword, rol: 'user' } }),
+    prisma.usuario.create({ data: { email: 'user2@cifpaviles.es', password: userPassword, rol: 'user' } }),
+  ]);
 
   console.log('🔐 Usuarios demo creados (Admin y Clientes con contraseñas hasheadas).');
 
-  // 4. Crear 10 Campañas
+  // 4. Crear 10 Campañas asociándolas a un usuario propietario
   console.log('🏰 Creando campañas de prueba (10 registros)...');
   const campanasCreadas = [];
   
   for (let i = 1; i <= 10; i++) {
+    // Asignamos la campaña cíclicamente a uno de los usuarios creados
+    const usuarioPropietario = usuarios[i % usuarios.length];
+
     const campana = await prisma.campana.create({
       data: {
+        usuarioId: usuarioPropietario.id, // <-- NUEVO: Vinculamos la campaña al usuario
         nombre: `Campaña de Fantasía ${i}`,
         sistemaJuego: i % 2 === 0 ? 'D&D 5.5' : 'Call of Cthulhu',
         descripcion: `Descripción detallada de la campaña número ${i} para pruebas del sistema.`,

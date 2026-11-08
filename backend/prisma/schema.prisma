@@ -8,14 +8,18 @@ generator client {
 }
 
 model Campana {
-  id            Int             @id @default(autoincrement()) @map("id") @db.UnsignedInt
+id            Int             @id @default(autoincrement()) @map("id") @db.UnsignedInt
+  usuarioId     Int             @map("usuario_id") @db.UnsignedInt  
   nombre        String          @unique @db.VarChar(100)
   sistemaJuego  String          @map("sistema_juego") @db.VarChar(50)
   descripcion   String?         @db.Text
   fechaInicio   DateTime        @default(now()) @map("fecha_inicio")
   esPublico     Boolean         @default(false) @map("es_publico")
 
-  // Relaciones 1:N
+  // Relación con el Usuario Propietario (Anti-BOLA)
+  usuario       Usuario         @relation(fields: [usuarioId], references: [id], onDelete: Cascade) // <-- NUEVO
+
+  // Relaciones 1:N existentes
   personajes    Personaje[]
   sesiones      Sesion[]
   pnjs          Pnj[]
@@ -137,10 +141,13 @@ model SesionPnj {
 }
 
 model Usuario {
-  id       Int      @id @default(autoincrement()) @db.UnsignedInt
-  email    String   @unique @db.VarChar(100)
-  password String   @db.VarChar(255) // Para almacenar el hash de bcrypt
-  rol      String   @default("user") @db.VarChar(20) // "admin" o "user"
+id       Int       @id @default(autoincrement()) @db.UnsignedInt
+  email    String    @unique @db.VarChar(100)
+  password String    @db.VarChar(255)
+  rol      String    @default("user") @db.VarChar(20)
+
+  // Relación inversa para acceder a las campañas del usuario
+  campanas Campana[] 
 
   @@map("usuario")
 }

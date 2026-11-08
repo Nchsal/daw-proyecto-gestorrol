@@ -2,6 +2,7 @@
 
 ```mermaid
 erDiagram
+    USUARIO ||--o{ CAMPANA : "crea"
     CAMPANA ||--o{ PERSONAJE : "contiene"
     CAMPANA ||--o{ LOCALIZACION : "incluye"
     CAMPANA ||--o{ SESION : "registra"
@@ -18,6 +19,7 @@ erDiagram
 
     CAMPANA {
         int id PK
+        int usuario_id FK "Unsigned, Referencia a USUARIO(id)"
         string nombre
         string sistema_juego
         text descripcion
