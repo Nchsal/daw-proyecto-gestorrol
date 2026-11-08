@@ -135,3 +135,12 @@ model SesionPnj {
   @@id([sesionId, pnjId])
   @@map("sesion_pnj")
 }
+
+model Usuario {
+  id       Int      @id @default(autoincrement()) @db.UnsignedInt
+  email    String   @unique @db.VarChar(100)
+  password String   @db.VarChar(255) // Para almacenar el hash de bcrypt
+  rol      String   @default("user") @db.VarChar(20) // "admin" o "user"
+
+  @@map("usuario")
+}

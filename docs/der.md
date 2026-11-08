@@ -85,4 +85,11 @@ erDiagram
         int sesion_id PK, FK
         int pnj_id PK, FK
     }
+
+    USUARIO {
+        int id PK "Unsigned, Autoincrement"
+        string email UK "VarChar(100)"
+        string password "VarChar(255) - Hash bcrypt"
+        string rol "VarChar(20) - admin/user"
+    }
 ```
