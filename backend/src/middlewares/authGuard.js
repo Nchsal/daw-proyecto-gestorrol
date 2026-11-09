@@ -30,10 +30,10 @@ const authGuard = (req, res, next) => {
     req.user = decoded; // { id, rol, email, ... }
     next();
   } catch (error) {
-    return res.status(403).json( {
-      type: "https://api.cifpaviles.es/errors/v1/403",
+    return res.status(401).json( {
+      type: "https://api.cifpaviles.es/errors/v1/401",
       title: "Token inválido o expirado",
-      status: 403,
+      status: 401,
       detail: "El token proporcionado no es válido o ha caducado.",
       instance: req.originalUrl,
       timestamp: new Date().toISOString()
