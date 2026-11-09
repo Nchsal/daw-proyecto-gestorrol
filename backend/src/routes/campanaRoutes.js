@@ -12,12 +12,12 @@ router.get('/', authGuard, obtenerCampanas);
 // POST Crear campaña (201 Created / 422 Unprocessable)
 router.post('/', authGuard, crearCampana);
 
-// GET Buscar por ID (200 OK / 404 Not Found)
-router.get('/:id', authGuard, obtenerCampanaPorId);
-
 // GET Ruta exclusiva de administrador para probar el 403 Forbidden
 router.get('/admin/panel', authGuard, roleGuard(['admin']), (req, res) => {
   res.status(200).json({ message: "Bienvenido al panel de administración" });
 });
+
+// GET Buscar por ID (200 OK / 404 Not Found)
+router.get('/:id', authGuard, obtenerCampanaPorId);
 
 export default router;
