@@ -1,4 +1,5 @@
 // backend/src/services/campanaService.js
+// backend/src/services/campanaService.js
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -19,6 +20,14 @@ export const crearCampanaService = async (data, userId) => {
 export const obtenerCampanaPorIdService = async (id) => {
   return await prisma.campana.findUnique({
     where: { id: Number(id) },
-    include: { usuario: true } // Opcional: para ver datos del creador si se requiere
+    include: {
+      usuario: {
+        select: {
+          id: true,
+          email: true,
+          rol: true,
+        },
+      },
+    },
   });
 };

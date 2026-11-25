@@ -10,41 +10,45 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const prisma = new PrismaClient();
-const JWT_SECRET = process.env.JWT_SECRET || 'clave_secreta_temporal_gestor_rol';
+
+const getJwtSecret = () => {
+  if (!process.env.JWT_SECRET) {
+    throw new Error('Falta la variable de entorno obligatoria JWT_SECRET');
+  }
+  return process.env.JWT_SECRET;
+};
 
 export const loginUser = async (email, password) => {
-  // 1. Buscar el usuario en la base de datos
+  const jwtSecret = getJwtSecret();
+
   const user = await prisma.usuario.findUnique({
     where: { email }
   });
 
   if (!user) {
-    throw new Error('Credenciales inválidas'); // Será capturado como error de autenticación
+    throw new Error('Credenciales inválidas');
   }
 
-  // 2. Verificar la contraseña con bcrypt
   const isPasswordValid = await bcrypt.compare(password, user.password);
 
   if (!isPasswordValid) {
     throw new Error('Credenciales inválidas');
   }
 
-  // 3. Generar el token JWT incluyendo los datos clave (id, rol, email)
   const token = jwt.sign(
-    { 
-      id: user.id, 
-      email: user.email, 
-      rol: user.rol 
+    {
+      id: user.id,
+      email: user.email,
+      rol: user.rol
     },
-    JWT_SECRET,
-    { expiresIn: '8h' } // El token caduca en 8 horas
+    jwtSecret,
+    { expiresIn: '2h' }
   );
 
   return {
     token,
     user: {
       id: user.id,
-      nombre: user.nombre,
       email: user.email,
       rol: user.rol
     }
