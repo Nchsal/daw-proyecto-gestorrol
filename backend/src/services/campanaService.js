@@ -19,6 +19,47 @@ export const crearCampanaService = async (data, userId) => {
 export const obtenerCampanaPorIdService = async (id) => {
   return await prisma.campana.findUnique({
     where: { id: Number(id) },
-    include: { usuario: true } // Opcional: para ver datos del creador si se requiere
+    include: {
+      usuario: {
+        select: {
+          id: true,
+          email: true,
+          rol: true,
+        },
+      },
+    },
+  });
+};
+
+export const obtenerCampanaBasicaService = async (id) => {
+  return await prisma.campana.findUnique({
+    where: { id: Number(id) },
+    select: {
+      id: true,
+      usuarioId: true,
+      nombre: true,
+    },
+  });
+};
+
+export const actualizarCampanaService = async (id, data) => {
+  return await prisma.campana.update({
+    where: { id: Number(id) },
+    data,
+    include: {
+      usuario: {
+        select: {
+          id: true,
+          email: true,
+          rol: true,
+        },
+      },
+    },
+  });
+};
+
+export const eliminarCampanaService = async (id) => {
+  return await prisma.campana.delete({
+    where: { id: Number(id) },
   });
 };

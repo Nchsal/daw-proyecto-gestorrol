@@ -2,16 +2,46 @@
     "clientName": "Thunder Client",
     "collectionName": "Gestor de Rol - API",
     "collectionId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
-    "dateExported": "2026-11-08T19:13:50.532Z",
+    "dateExported": "2026-11-25T19:18:26.742Z",
     "version": "1.4",
     "folders": [],
     "requests": [
+        {
+            "_id": "62cfde31-32c8-4e12-9ff0-cc46a9b1d722",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "POST Login de Admin",
+            "url": "{{baseUrl}}/auth/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2026-11-25T18:04:13.717Z",
+            "modified": "2026-11-25T18:04:13.717Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{",
+                    "  \"email\": \"admin@cifpaviles.es\",",
+                    "  \"password\": \"Admin1234!\"",
+                    "}"
+                ],
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
         {
             "_id": "6179f8fe-4fd0-4487-8127-f49bae44af1f",
             "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
             "containerId": "",
             "name": "POST Login de Usuario1",
-            "url": "http://localhost:4000/api/v1/auth/login",
+            "url": "{{baseUrl}}/auth/login",
             "method": "POST",
             "sortNum": 40000,
             "created": "2026-11-08T15:20:25.827Z",
@@ -20,20 +50,58 @@
             "body": {
                 "type": "json",
                 "raw": [
-                    "{\r",
-                    "  \"email\": \"user1@cifpaviles.es\",\r",
-                    "  \"password\": \"User1234!\"\r",
+                    "{",
+                    "  \"email\": \"user1@cifpaviles.es\",",
+                    "  \"password\": \"User1234!\"",
                     "}"
                 ],
                 "form": []
-            }
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "33eb75f3-680d-457f-8a98-128d66b1bb28",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "POST Login de Usuario2",
+            "url": "{{baseUrl}}/auth/login",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2026-11-08T19:01:03.042Z",
+            "modified": "2026-11-08T19:01:03.042Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{",
+                    "  \"email\": \"user2@cifpaviles.es\",",
+                    "  \"password\": \"User1234!\"",
+                    "}"
+                ],
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
         },
         {
             "_id": "8019e402-791e-42a5-bd14-adac6557f17b",
             "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
             "containerId": "",
             "name": "GET Listar Campañas (Éxito - 200 OK)",
-            "url": "http://localhost:4000/api/v1/campanas",
+            "url": "{{baseUrl}}/campanas",
             "method": "GET",
             "sortNum": 60000,
             "created": "2026-11-08T16:04:13.491Z",
@@ -41,27 +109,43 @@
             "headers": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUBjaWZwYXZpbGVzLmVzIiwicm9sIjoidXNlciIsImlhdCI6MTc5NDE1MTI4MCwiZXhwIjoxNzk0MTgwMDgwfQ.pEYJw7JsbZqsgCDYb50oqoKfS6IsEBQ4zzldrp1_LOg"
-            }
+                "bearer": "{{tokenUser1}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
         },
         {
             "_id": "93000b76-9f8d-44d6-ba49-2f93919765c8",
             "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
             "containerId": "",
             "name": "GET Listar Campañas (Sin Token - 401 Unauthorized)",
-            "url": "http://localhost:4000/api/v1/campanas",
+            "url": "{{baseUrl}}/campanas",
             "method": "GET",
             "sortNum": 70000,
             "created": "2026-11-08T16:08:20.570Z",
             "modified": "2026-11-08T16:08:20.570Z",
-            "headers": []
+            "headers": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "401"
+                }
+            ]
         },
         {
             "_id": "cde2e6fc-cd80-4a4d-afc7-c9e408268cc1",
             "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
             "containerId": "",
             "name": "POST Crear Campaña (Éxito - 201 Created)",
-            "url": "http://localhost:4000/api/v1/campanas",
+            "url": "{{baseUrl}}/campanas",
             "method": "POST",
             "sortNum": 80000,
             "created": "2026-11-08T16:42:53.779Z",
@@ -79,15 +163,23 @@
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUBjaWZwYXZpbGVzLmVzIiwicm9sIjoidXNlciIsImlhdCI6MTc5NDE1MTI4MCwiZXhwIjoxNzk0MTgwMDgwfQ.pEYJw7JsbZqsgCDYb50oqoKfS6IsEBQ4zzldrp1_LOg"
-            }
+                "bearer": "{{tokenUser1}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "201"
+                }
+            ]
         },
         {
             "_id": "e7f1d454-aef2-44a1-8e44-57e1a9a277f8",
             "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
             "containerId": "",
             "name": "POST Crear Campaña (Error Validación - 422 Unprocessable Entity)",
-            "url": "http://localhost:4000/api/v1/campanas",
+            "url": "{{baseUrl}}/campanas",
             "method": "POST",
             "sortNum": 100000,
             "created": "2026-11-08T16:46:24.912Z",
@@ -105,31 +197,23 @@
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUBjaWZwYXZpbGVzLmVzIiwicm9sIjoidXNlciIsImlhdCI6MTc5NDE1MTI4MCwiZXhwIjoxNzk0MTgwMDgwfQ.pEYJw7JsbZqsgCDYb50oqoKfS6IsEBQ4zzldrp1_LOg"
-            }
-        },
-        {
-            "_id": "47c9cc8d-f12d-4dd0-8c92-e7a103716c3d",
-            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
-            "containerId": "",
-            "name": "GET Buscar Campaña por ID (No Encontrada - 404 Not Found)",
-            "url": "http://localhost:4000/api/v1/campanas/9999",
-            "method": "GET",
-            "sortNum": 110000,
-            "created": "2026-11-08T16:48:50.948Z",
-            "modified": "2026-11-08T16:48:50.948Z",
-            "headers": [],
-            "auth": {
-                "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUBjaWZwYXZpbGVzLmVzIiwicm9sIjoidXNlciIsImlhdCI6MTc5NDE1MTI4MCwiZXhwIjoxNzk0MTgwMDgwfQ.pEYJw7JsbZqsgCDYb50oqoKfS6IsEBQ4zzldrp1_LOg"
-            }
+                "bearer": "{{tokenUser1}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "422"
+                }
+            ]
         },
         {
             "_id": "59c53713-bbf7-4e77-9af9-d4a0f753bed3",
             "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
             "containerId": "",
-            "name": "GET Panel Admin (Acceso Denegado - 403 Forbidden)",
-            "url": "http://localhost:4000/api/v1/campanas/admin/panel",
+            "name": "GET Panel Admin (Acceso Denegado - 401 Unauthorized)",
+            "url": "{{baseUrl}}/campanas/admin/panel",
             "method": "GET",
             "sortNum": 120000,
             "created": "2026-11-08T16:50:18.904Z",
@@ -137,37 +221,23 @@
             "headers": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUBjaWZwYXZpbGVzLmVzIiwicm9sIjoidXNlciIsImlhdCI6MTc5NDE1MTI4MCwiZXhwIjoxNzk0MTgwMDgwfQ.pEYJw7JsbZqsgCDYb50oqoKfS6IsEBQ4zzldrp1_LOg"
-            }
-        },
-        {
-            "_id": "33eb75f3-680d-457f-8a98-128d66b1bb28",
-            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
-            "containerId": "",
-            "name": "POST Login de Usuario2",
-            "url": "http://localhost:4000/api/v1/auth/login",
-            "method": "POST",
-            "sortNum": 130000,
-            "created": "2026-11-08T19:01:03.042Z",
-            "modified": "2026-11-08T19:01:03.042Z",
-            "headers": [],
-            "body": {
-                "type": "json",
-                "raw": [
-                    "{",
-                    "  \"email\": \"user2@cifpaviles.es\",",
-                    "  \"password\": \"User1234!\"",
-                    "}"
-                ],
-                "form": []
-            }
+                "bearer": "{{tokenUser1}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "401"
+                }
+            ]
         },
         {
             "_id": "12d7d1d1-33b8-4d71-9fe0-ea7d9e412923",
             "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
             "containerId": "",
             "name": "POST Crear campaña vinculada (Éxito - 201 Created)",
-            "url": "http://localhost:4000/api/v1/campanas",
+            "url": "{{baseUrl}}/campanas",
             "method": "POST",
             "sortNum": 140000,
             "created": "2026-11-08T19:06:58.052Z",
@@ -176,25 +246,33 @@
             "body": {
                 "type": "json",
                 "raw": [
-                    "{\r",
-                    "  \"nombre\": \"Campaña de Prueba de User1\",\r",
-                    "  \"sistemaJuego\": \"D&D 5.5\",\r",
-                    "  \"descripcion\": \"Probando la propiedad de recursos.\"\r",
+                    "{",
+                    "  \"nombre\": \"Campaña de Prueba de User1 - Tercera\",",
+                    "  \"sistemaJuego\": \"D&D 5.5\",",
+                    "  \"descripcion\": \"Probando la propiedad de recursos.\"",
                     "}"
                 ],
                 "form": []
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUBjaWZwYXZpbGVzLmVzIiwicm9sIjoidXNlciIsImlhdCI6MTc5NDE1MTI4MCwiZXhwIjoxNzk0MTgwMDgwfQ.pEYJw7JsbZqsgCDYb50oqoKfS6IsEBQ4zzldrp1_LOg"
-            }
+                "bearer": "{{tokenUser1}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "201"
+                }
+            ]
         },
         {
             "_id": "00cf305d-8a7a-429b-a8c3-e6b407dd40f4",
             "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
             "containerId": "",
             "name": "GET Buscar campaña vinculada - Test anti-BOLA  (Acceso Denegado - 403 Forbidden)",
-            "url": "http://localhost:4000/api/v1/campanas/11",
+            "url": "{{baseUrl}}/campanas/11",
             "method": "GET",
             "sortNum": 150000,
             "created": "2026-11-08T19:11:18.280Z",
@@ -202,9 +280,223 @@
             "headers": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ1c2VyMkBjaWZwYXZpbGVzLmVzIiwicm9sIjoidXNlciIsImlhdCI6MTc5NDE2NDcwMCwiZXhwIjoxNzk0MTkzNTAwfQ.8HT0gapAf768V0xAQkrrKBfnwEvxQJ0vPym6T96OEXY"
-            }
+                "bearer": "{{tokenUser2}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "403"
+                }
+            ]
+        },
+        {
+            "_id": "0a16065f-7479-4b1a-99a5-b41c1f0ee9e9",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "GET Listar CAmpañas (Sin token)",
+            "url": "{{baseUrl}}/campanas",
+            "method": "GET",
+            "sortNum": 160000,
+            "created": "2026-11-09T10:53:37.199Z",
+            "modified": "2026-11-09T10:53:37.199Z",
+            "headers": []
+        },
+        {
+            "_id": "2da08ba4-4d35-44c9-8792-09f69c2da267",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "GET Sesiones - Listar por campaña (200)",
+            "url": "{{baseUrl}}/sesiones/campana/{{campanaId}}",
+            "method": "GET",
+            "sortNum": 180000,
+            "created": "2026-11-25T17:31:02.320Z",
+            "modified": "2026-11-25T17:31:02.321Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{tokenUser1}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "a72ec5a2-3fab-4248-a5db-eff6d8a23d33",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "POST Sesiones - Crear sesión (201)",
+            "url": "{{baseUrl}}/sesiones/campana/{{campanaId}}",
+            "method": "POST",
+            "sortNum": 190000,
+            "created": "2026-11-25T17:35:59.537Z",
+            "modified": "2026-11-25T17:35:59.537Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{",
+                    "  \"numeroSesion\": 99,",
+                    "  \"fecha\": \"2026-11-25T18:00:00.000Z\",",
+                    "  \"resumen\": \"Sesión de prueba desde Thunder Client.\",",
+                    "  \"eventosPrincipales\": \"Exploración y prueba de endpoint.\"",
+                    "}"
+                ],
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{tokenUser1}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "201"
+                }
+            ]
+        },
+        {
+            "_id": "a0dda59b-b347-49c8-8458-d0618e5ae9ae",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "POST Secretos del master - Crear Secreto (201)",
+            "url": "{{baseUrl}}/secretos-master/campana/{{campanaId}}",
+            "method": "POST",
+            "sortNum": 200000,
+            "created": "2026-11-25T17:42:10.277Z",
+            "modified": "2026-11-25T17:42:10.277Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{",
+                    "  \"titulo\": \"El traidor de la corte\",",
+                    "  \"contenidoOculto\": \"El consejero real trabaja en secreto para la facción rival.\",",
+                    "  \"revelado\": false",
+                    "}"
+                ],
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{tokenUser1}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "201"
+                }
+            ]
+        },
+        {
+            "_id": "056c3e05-d600-41b5-9ee8-3fe3666098b6",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "GET Sin autenticación (401)",
+            "url": "{{baseUrl}}/campanas",
+            "method": "GET",
+            "sortNum": 210000,
+            "created": "2026-11-25T17:46:59.044Z",
+            "modified": "2026-11-25T17:46:59.044Z",
+            "headers": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "401"
+                }
+            ]
+        },
+        {
+            "_id": "7bda113b-49b5-4d22-b1cf-3b27096dfd47",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "GET Anti-BOLA - Acceso a recurso ajeno (403)",
+            "url": "{{baseUrl}}/secretos-master/campana/{{campanaAjenaId}}",
+            "method": "GET",
+            "sortNum": 220000,
+            "created": "2026-11-25T17:51:40.221Z",
+            "modified": "2026-11-25T17:51:40.221Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{tokenUser1}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "403"
+                }
+            ]
+        },
+        {
+            "_id": "059fb309-1fea-4880-9e28-da00d912840a",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "GET Recurso inexistente (404)",
+            "url": "{{baseUrl}}/secretos-master/999999",
+            "method": "GET",
+            "sortNum": 230000,
+            "created": "2026-11-25T17:54:55.048Z",
+            "modified": "2026-11-25T17:54:55.048Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{tokenUser1}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "404"
+                }
+            ]
+        },
+        {
+            "_id": "0b696dd5-3848-4b66-a7bf-0db44ba6fefc",
+            "colId": "62a4cdbe-5ddd-4a5f-8e61-53654a475247",
+            "containerId": "",
+            "name": "POST Error de Validacion (422)",
+            "url": "{{baseUrl}}/secretos-master/campana/{{campanaId}}",
+            "method": "POST",
+            "sortNum": 240000,
+            "created": "2026-11-25T17:57:56.318Z",
+            "modified": "2026-11-25T17:57:56.318Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{\"titulo\": \"\"}"
+                ],
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{tokenUser1}}"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "422"
+                }
+            ]
         }
     ],
-    "ref": "_3GUv8NqUxiqjzeT8x3HVyVG6Eh5DfYLWEXlT9wq4O5o9V1D7ZDCJiL8WxVjaiJhQCeMSRv_KdZNa192pPOHGQ"
+    "ref": "_3GUv8NqUxiqjzeT8x3HV49j1fn1HwAgGZfNPNN3C-mUuu41XAVjqAFZVDa3FfJ8mDcNIy8lClk8q3i2SOq6hA"
 }

@@ -1,8 +1,14 @@
 // backend/src/routes/campanaRoutes.js
 import { Router } from 'express';
-import { obtenerCampanas, crearCampana, obtenerCampanaPorId } from '../controllers/campanaController.js';
-import  roleGuard  from '../middlewares/roleGuard.js';
-import  authGuard  from '../middlewares/authGuard.js';
+import {
+  obtenerCampanas,
+  crearCampana,
+  obtenerCampanaPorId,
+  actualizarCampana,
+  eliminarCampana
+} from '../controllers/campanaController.js';
+import roleGuard from '../middlewares/roleGuard.js';
+import authGuard from '../middlewares/authGuard.js';
 
 const router = Router();
 
@@ -17,7 +23,14 @@ router.get('/admin/panel', authGuard, roleGuard(['admin']), (req, res) => {
   res.status(200).json({ message: "Bienvenido al panel de administración" });
 });
 
-// GET Buscar por ID (200 OK / 404 Not Found)
+// GET Buscar por ID (200 OK / 403 Forbidden / 404 Not Found)
 router.get('/:id', authGuard, obtenerCampanaPorId);
+
+// PATCH / PUT Actualizar campaña por ID (200 OK / 400 / 403 / 404 / 422)
+router.patch('/:id', authGuard, actualizarCampana);
+router.put('/:id', authGuard, actualizarCampana);
+
+// DELETE Eliminar campaña por ID (200 OK / 403 Forbidden / 404 Not Found)
+router.delete('/:id', authGuard, eliminarCampana);
 
 export default router;
