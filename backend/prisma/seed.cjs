@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('🌱 Iniciando la siembra robusta de datos de prueba (Hito 2)...');
 
-  // 1. Limpieza de datos previa 
+  // 1. Limpieza de datos previa
   await prisma.asistenciaSesion.deleteMany();
   await prisma.sesionPnj.deleteMany();
   await prisma.secretoMaster.deleteMany();
@@ -37,14 +37,13 @@ async function main() {
   // 4. Crear 10 Campañas asociándolas a un usuario propietario
   console.log('🏰 Creando campañas de prueba (10 registros)...');
   const campanasCreadas = [];
-  
+
   for (let i = 1; i <= 10; i++) {
-    // Asignamos la campaña cíclicamente a uno de los usuarios creados
     const usuarioPropietario = usuarios[i % usuarios.length];
 
     const campana = await prisma.campana.create({
       data: {
-        usuarioId: usuarioPropietario.id, // <-- NUEVO: Vinculamos la campaña al usuario
+        usuarioId: usuarioPropietario.id,
         nombre: `Campaña de Fantasía ${i}`,
         sistemaJuego: i % 2 === 0 ? 'D&D 5.5' : 'Call of Cthulhu',
         descripcion: `Descripción detallada de la campaña número ${i} para pruebas del sistema.`,
@@ -55,7 +54,7 @@ async function main() {
     campanasCreadas.push(campana);
   }
 
-  // 5. Crear Localizaciones 
+  // 5. Crear Localizaciones
   console.log('🗺️ Creando localizaciones (12 registros)...');
   const localizacionesCreadas = [];
   for (let i = 1; i <= 12; i++) {
@@ -73,8 +72,8 @@ async function main() {
   console.log('⚔️ Creando personajes (12 registros)...');
   const personajesCreados = [];
   const nombresPjs = [
-    'Szeth Vallano', 'Lyra Windrunner', 'Thorgar Barbagris', 'Elendor Furia del Alba', 
-    'Vespera Shadowmend', 'Kaelen Vane', 'Berenice Kestrel', 'Dorn Ironforge', 
+    'Szeth Vallano', 'Lyra Windrunner', 'Thorgar Barbagris', 'Elendor Furia del Alba',
+    'Vespera Shadowmend', 'Kaelen Vane', 'Berenice Kestrel', 'Dorn Ironforge',
     'Mirena Moonwhisper', 'Zarek Bloodthorn', 'Tariq el Viajero', 'Isolde Brightshield'
   ];
 
@@ -91,13 +90,14 @@ async function main() {
     personajesCreados.push(pj);
   }
 
-  // 7. Crear Sesiones de juego 
+  // 7. Crear Sesiones de juego repartidas entre campañas
   console.log('📜 Creando sesiones (12 registros)...');
   const sesionesCreadas = [];
   for (let i = 1; i <= 12; i++) {
+    const campanaDestino = campanasCreadas[i % campanasCreadas.length];
     const sesion = await prisma.sesion.create({
       data: {
-        campanaId: campanasCreadas[0].id,
+        campanaId: campanaDestino.id,
         numeroSesion: i,
         fecha: new Date(`2026-02-${i < 10 ? '0' + i : i}T00:00:00.000Z`),
         resumen: `Resumen de los acontecimientos ocurridos en la sesión número ${i}.`,
@@ -107,7 +107,21 @@ async function main() {
     sesionesCreadas.push(sesion);
   }
 
-  // 8. Registrar Asistencia 
+  // 8. Crear Secretos del Máster
+  console.log('🤫 Creando secretos del máster (10 registros)...');
+  for (let i = 1; i <= 10; i++) {
+    const campanaDestino = campanasCreadas[i % campanasCreadas.length];
+    await prisma.secretoMaster.create({
+      data: {
+        campanaId: campanaDestino.id,
+        titulo: `Secreto del Máster ${i}`,
+        contenidoOculto: `Detalle oculto de la trama principal o motivación secreta número ${i}.`,
+        revelado: i % 4 === 0,
+      },
+    });
+  }
+
+  // 9. Registrar Asistencia
   console.log('🤝 Registrando asistencia en tabla M:N (8 filas)...');
   for (let i = 0; i < 8; i++) {
     await prisma.asistenciaSesion.create({
