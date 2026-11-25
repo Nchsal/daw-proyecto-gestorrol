@@ -5,7 +5,58 @@ Recibe los datos del cuerpo de la petición (req.body), llama al servicio y devu
 la respuesta en formato JSON o maneja el error de forma adecuada.
 */
 
-import { loginUser } from '../services/authService.js';
+import { registerUser, loginUser } from '../services/authService.js';
+
+export const register = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({
+        type: "https://api.cifpaviles.es/errors/v1/400",
+        title: "Solicitud incorrecta",
+        status: 400,
+        detail: "Se requiere el campo 'email' y el campo 'password' para registrarse.",
+        instance: req.originalUrl,
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    const emailLimpio = String(email).trim().toLowerCase();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(emailLimpio) || String(password).length < 8) {
+      return res.status(422).json({
+        type: "https://api.cifpaviles.es/errors/validation-failed",
+        title: "Error de Validación",
+        status: 422,
+        detail: "El correo electrónico debe tener un formato válido y la contraseña debe tener al menos 8 caracteres.",
+        instance: req.originalUrl,
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    const nuevoUsuario = await registerUser(emailLimpio, String(password));
+
+    return res.status(201).json({
+      message: "Usuario registrado con éxito",
+      data: nuevoUsuario
+    });
+  } catch (error) {
+    if (error.status === 409) {
+      return res.status(409).json({
+        type: error.type || "https://api.cifpaviles.es/errors/v1/409",
+        title: error.title || "Conflicto de recurso",
+        status: 409,
+        detail: error.message,
+        instance: req.originalUrl,
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    next(error);
+  }
+};
 
 export const login = async (req, res, next) => {
   try {
@@ -42,7 +93,7 @@ export const login = async (req, res, next) => {
         timestamp: new Date().toISOString()
       });
     }
-    
+
     // Si es otro fallo inesperado, lo derivamos al middleware global de errores
     next(error);
   }
