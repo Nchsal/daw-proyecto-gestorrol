@@ -45,8 +45,8 @@ Está diseñado para utilizarse tanto de forma asíncrona, durante la fase de pl
 
 ### 2.1. Matriz de roles (RBAC)
 - **Administrador:** Gestión global de la plataforma, control de usuarios registrados, moderación de contenidos y mantenimiento de los catálogos maestros del sistema.
-- **Usuario registrado:** Creación y participación en campañas de rol, gestión completa de personajes, aportación de notas de sesión, consulta interctiva de mapas y cronología y publicación comunitaria de contenido.
-- **Público / invitado:** Visualización de la página de presentación informativa de la plataforma, consulta del catálogo público de campañas abiertas o de muestra distribuidas por creadores y editoriales, y formulario de registtro o inicio de sesión.
+- **Usuario registrado:** Creación y participación en campañas de rol, gestión completa de personajes, aportación de notas de sesión, consulta interactiva de mapas y cronología y publicación comunitaria de contenido.
+- **Público / invitado:** Visualización de la página de presentación informativa de la plataforma, consulta del catálogo público de campañas abiertas o de muestra distribuidas por creadores y editoriales, y formulario de registro o inicio de sesión.
 
 > **Nota de Diseño:** El sistema emplea un modelo de roles contextuales. Todos los usuarios de la plataforma comparten el rol base de “Usuario Registrado”. La distinción entre ‘Director de Juego’ y ‘Jugador’ no recae sobre el perfil global de la cuenta, sino que se define de forma dinámica en la relación de membresía de cada Mesa de Campaña específica, permitiendo que un mismo usuario ejerza como Director en sus propias aventuras y como Jugador en las de otros.
 
@@ -55,7 +55,7 @@ Está diseñado para utilizarse tanto de forma asíncrona, durante la fase de pl
 * **CU-02:** Administración técnica global de la plataforma, control de cuentas de usuarios y moderación del catálogo público de contenidos (Rol: Administrador).
 * **CU-03:** Creación y configuración de los Cuadernos de Campaña modulares de uso personal, activando opcionalmente el registro de mapas, diarios, inventarios, líneas de tiempo o fichas de PNJs (Rol: Usuario Registrado).
 * **CU-04:** Creación, gestión y dirección de campañas colaborativas (Mesas de Juego), manejando solicitudes y permisos de los jugadores asociados (Rol: Usuario Registrado ejercitando como Director de Juego).
-* **CU-05:** Creación, edición y evolución de fichas de personaje vinculados tanto aos Cuadernos de Campaña personales como a las Mesas de Juego colaborativas (Rol: Usuario Registrado).
+* **CU-05:** Creación, edición y evolución de fichas de personaje vinculados tanto a los Cuadernos de Campaña personales como a las Mesas de Juego colaborativas (Rol: Usuario Registrado).
 * **CU-06:** Registro de eventos en líneas temporales, diarios de sesiones y vinculación de localizaciones en mapas interactivos (Rol: Usuario Registrado).
 * **CU-07:** Permite administrar la información compartida en la Mesa de Juego. Mecanismo de seguridad en servidor: El backend intercepta las peticiones sobre notas de sesión y recursos asociados, ejecutando una consulta filtrada que excluye automáticamente los registros con la bandera `es_secreto_master = true` cuando el token JWT del usuario pertenezca a un perfil con rol contextual de Jugador en esa mesa. Solo las peticiones autenticadas con el rol contextual de Director de Juego retornarán la entidad completa con los secretos incluidos. (Rol: Usuario Registrado ejercitando como Director de Juego).
 * **CU-08:** Sistema de referencias cruzadas e hipervinculación dinámica, permitiendo enlazar PNJs, localizaciones y objetos directamente desde los textos de los diarios de sesión para su consulta rápida (Rol: Usuario Registrado).
